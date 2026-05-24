@@ -6,6 +6,12 @@
 
 ---
 
+### **Important Notes:**
+
+- The data used in this project is a public dataset, it is not confidential data.
+
+- Files are labelled from 01-05. They can be read in numeric order. The dashboard is screenshotted and linked below, and it is the last step in the process.
+
 ### **Scenario and Objective:**
 
 Alpha Green Insurance LLC (Not a real company) wants to make changes to their formulary for select Medicare Advantage policies and supplements in 2024. They have asked me to look over the formulary data for the previous years to get a feel for the territory, and create a list of medications that can be reliably removed from a formulary. My goal is to answer the following business question:
@@ -22,15 +28,19 @@ I will translate this business question into data questions:
 
 <img width="1193" height="668" alt="image" src="https://github.com/user-attachments/assets/b2ba68b0-42a2-4f25-b88e-8d3d6dec5553" />
 <br>
-To interact with the dashboard or search for individual medication scores, see the Power BI section of the project, linked here:
+To interact with the dashboard or search for individual medication scores, see the Power BI section of the project, linked here:  
+<br>
+<br>
+
+[Dashboard](https://app.powerbi.com/view?r=eyJrIjoiZmYyYzJiNDctOTI1Ny00NDRiLWE5OTItODI5NDc0M2U1ZjE0IiwidCI6ImRmZWM4YzJjLThlNWUtNDI4Yy05MmE4LTkzOTI1ZjM3Y2JlYiJ9)
 
 ### **Data Preprocessing:**
 
 Aside from generic preprocessing (outliers, duplicates and missing values) I needed to alter the data structure itself. The data is in a **wide format**, meaning each item has a column for every individual year. Most of the cleaning required melting it into a long format. Below is the original data:
 
-|HCPCS\_Cd|Brnd\_Name|Gnrc\_Name|Tot\_Clms\_2019|Tot\_Clms\_2020|Tot\_Clms\_2021|Tot\_Clms\_2022|Tot\_Clms\_2023|
-|---|---|---|---|---|---|---|---|
-|90376|Imogam Rabies-HT|Rabies Immune Globulin/PF|498\.0|348\.0|333\.0|373\.0|207|
+|Brnd\_Name|Gnrc\_Name|Tot\_Clms\_2019|Tot\_Clms\_2020|Tot\_Clms\_2021|Tot\_Clms\_2022|Tot\_Clms\_2023|
+|---|---|---|---|---|---|---|
+|Imogam Rabies-HT|Rabies Immune Globulin/PF|498\.0|348\.0|333\.0|373\.0|207|
 
 The problem is the rabies vaccine has a seperate 'total claims' column for every year. This wide structure makes the data difficult to to work with. To fix this, I used the following code snippet on each individual item to melt them down, and then I rejoined them into one table.
 
@@ -47,17 +57,19 @@ df_tot_spndng.head()
 ```
 And this is the result:
 
-|HCPCS\_Cd|Brnd\_Name|Gnrc\_Name|year|Tot\_Clms|
-|---|---|---|---|---|
-|90376\_2019|Imogam Rabies-HT|Rabies Immune Globulin/PF|2019|498\.0|
-|90376\_2020|Imogam Rabies-HT|Rabies Immune Globulin/PF|2020|348\.0|
-|90376\_2021|Imogam Rabies-HT|Rabies Immune Globulin/PF|2021|333\.0|
-|90376\_2022|Imogam Rabies-HT|Rabies Immune Globulin/PF|2022|373\.0|
-|90376\_2023|Imogam Rabies-HT|Rabies Immune Globulin/PF|2023|207\.0|
+|Brnd\_Name|Gnrc\_Name|year|Tot\_Clms|
+|---|---|---|---|
+|Imogam Rabies-HT|Rabies Immune Globulin/PF|2019|498\.0|
+|Imogam Rabies-HT|Rabies Immune Globulin/PF|2020|348\.0|
+|Imogam Rabies-HT|Rabies Immune Globulin/PF|2021|333\.0|
+|Imogam Rabies-HT|Rabies Immune Globulin/PF|2022|373\.0|
+|Imogam Rabies-HT|Rabies Immune Globulin/PF|2023|207\.0|
 
 Now the rabies vaccine is dupilcated once for each year, and there is a 'year' column to dilineate it. Now I can partition things by year instead of referencing a set of columns each time I need a calculation. This logic was applied to all date-identified columns in the dataset, creating a much simpler structure for use in SQL and Power BI.
 
 To see each step of the data cleaning process, see the preprocessing section of this project, linked here:
+
+[Preprocessing](01_medicare_medication.py)
 
 ### **How can I solve the problem?**
 
@@ -83,8 +95,14 @@ LIMIT 5;
 ```
 <img width="492" height="132" alt="image" src="https://github.com/user-attachments/assets/48770bac-28a1-43d4-bfaf-67aaddf4a462" />
 <br>
-The rest of the code I used to get these scores can be found in the SQL section of this project, linked here:
+The rest of the code I used to get these scores can be found in the SQL section of this project, linked here:  
+<br>
+<br>
 
+[SQL_Imports](02_Importing.sql)  
+[SQL_Nulls](03_Nulls.sql)  
+[SQL_Growth](04_Growth%20Calculation.sql)  
+[SQL_Scoring](05_Scoring.sql)  
 
 ### **Results and Observations:**
 
@@ -100,12 +118,17 @@ From this, it can be concluded that there isn't a very strong correlation betwee
   
 <img width="1176" height="258" alt="image" src="https://github.com/user-attachments/assets/ebbb16bf-5b69-4bd8-84d8-0ec1cb7bff63" />
 <br>
+<br>
 
 - If a policy requires tier adjustment of medications due to high dosage prices AND high number of beneficiaries for the most recent year in the data (2023), these would be the top 10 candidates.
 
 <img width="1172" height="276" alt="image" src="https://github.com/user-attachments/assets/3fd6f8d3-624b-4afa-bd60-828e7659064a" />
 <br>
 The rest of the dashboard as well as the scores for all other medications can be found in the Power BI section of this project, linked here:
+<br>
+<br>
+
+[Dashboard](https://app.powerbi.com/view?r=eyJrIjoiZmYyYzJiNDctOTI1Ny00NDRiLWE5OTItODI5NDc0M2U1ZjE0IiwidCI6ImRmZWM4YzJjLThlNWUtNDI4Yy05MmE4LTkzOTI1ZjM3Y2JlYiJ9)
 
 ### **Analyst Recommendations:**
 
