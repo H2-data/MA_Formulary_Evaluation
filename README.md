@@ -18,9 +18,27 @@ How to Read This Repository:
 
 - Files are labelled from 01-05. They can be read in numeric order. This README file contains the important points of the analysis, and should be read first.
 
+- To test the code on this project, you will need access to the following resources:
+  
+  	- Visual Studio Code (Or any other all-nclusive coding environment.)
+  	- A MySQL environment extension
+  	- Power BI Desktop
+  	- An OBDC Connector
+  	- A Python environment extension with the following libraries installed and imported:
+  	  
+  	 	- Pandas
+  	    - xxx
+  	    - xx
+  
+Step 1. Plug the CSV file into the python script and run it until you reach the 'Database Creation' section. 
+Step 2. Once you get to the Database Creation section, you can put the username, password and database name into the SQL alchemy engine object. Then run the code. It should slice the cleaned data into tables and send them to the database.
+Step 3. Run the SQL code in your SQL environment.
+Step 4. Open the Power BI pbix file.
+Step 5. You need to have an ODBC connector since the code is MySQL. once you've created the connection object, you can connect the database to Power BI using the Power Query. This should activate the dashboard.
+
 Who is the Project's Intended Recipient?:
 
-- This project is meant to be recieved and read by Alpha Green Insurance LLC project managers currently assessing the company's Medicare Advantage policies. This project will contain a complete ranking of the financial risks of every single medication, as well as an overview of medications with high liability for financial losses. These resources can be used to accurately determine how to safely alter MA policy forumlaries to minimize finiancial loss.
+- This project is meant to be recieved and read by Alpha Green Insurance LLC project managers and pharmacy actuaries currently assessing the company's Medicare Advantage policies. This project will contain a complete ranking of the financial risks of every single medication, as well as an overview of medications with high liability for financial losses. These resources can be used to accurately determine how to safely alter MA policy forumlaries to minimize finiancial loss.
 
 ### **Scenario and Objective:**
 
