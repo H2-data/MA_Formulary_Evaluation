@@ -124,13 +124,22 @@ From this, it can be concluded that there isn't a very strong correlation betwee
 
 <img width="1172" height="276" alt="image" src="https://github.com/user-attachments/assets/3fd6f8d3-624b-4afa-bd60-828e7659064a" />
 <br>
+
+- I standardized the data using the percent rank compisite score so the visuals look more balanced, but it's important to note a couple of things. Firstly, when using the raw numbers, it's clear that Kymriah is an extreme outlier. I pointed this out briefly in the Python outlier section, but I also wanted to reference it here. If a MA policy is being evaluated for formulary adjustment, Kymriah will likely always be the first to be adjusted.
+
+[insert visual here]
+
+- In my original analysis, I wanted a medication's growth metrics to factor into the final score, and I have an SQL section dedicated to calculating growth metrics linked here. However, it appears that most medications don't change much from year to year. Every medication grows less than 1% from 2021-2022 and 2022-2023, As shown by the output below. This means that when considering future plan adjustments, it might be best to just use the average price per dose for the previous year.
+
+
+
 The rest of the dashboard as well as the scores for all other medications can be found in the Power BI section of this project, linked here:
 <br>
 <br>
 
 [Dashboard](https://app.powerbi.com/view?r=eyJrIjoiZmYyYzJiNDctOTI1Ny00NDRiLWE5OTItODI5NDc0M2U1ZjE0IiwidCI6ImRmZWM4YzJjLThlNWUtNDI4Yy05MmE4LTkzOTI1ZjM3Y2JlYiJ9)
 
-### **Analyst Recommendations:**
+### **Analyst Notes and Recommendations:**
 
 - The scoring system is simple: **The higher the score, the more liable the medication is for causing losses.** I showed the top 10 items for each data question in the previous section, but the dashboard list contains all medications and their respective attribute scores and final composite score. Should a policy need modification beyond the scope of the top 10, simply go down the list and see which medications are the most appropriate for removal. You can also manually search specific medications and years using the search bar at the top.
   
@@ -139,3 +148,5 @@ The rest of the dashboard as well as the scores for all other medications can be
 - Before adjusting a medication, be sure to verify whether it is an outlier. **Outliers are marked in yellow on the dashboard**. If a medication is an outlier for the specified year, look into that medication to verify whether it was only a liability for that year, or if it's been a liability for multiple years.
 
 - This dashboard list should be updated with fresh data annually. As long as the data schema is maintained, it can be sent through the pipeline found in each part of the project (Python -> SQL -> Power BI). It will score the medications and organize them by liability.
+
+- 
