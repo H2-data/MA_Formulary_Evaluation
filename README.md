@@ -159,9 +159,9 @@ From this, it can be concluded that there isn't a very strong correlation betwee
 <img width="1172" height="276" alt="image" src="https://github.com/user-attachments/assets/3fd6f8d3-624b-4afa-bd60-828e7659064a" />
 <br>
 
-- I standardized the data using the percent rank compisite score so the visuals look more balanced, but it's important to note a couple of things. Firstly, when using the raw numbers, it's clear that Kymriah is an extreme outlier. I pointed this out briefly in the Python outlier section, but I also wanted to reference it here. If a MA policy is being evaluated for formulary adjustment, Kymriah will likely always be the first to be adjusted.
+- I standardized the data using the percent rank compisite score so the visuals look more balanced, but I wanted to mention a dosage price outlier here. When using the raw numbers, it's clear that Kymriah is an extreme outlier in terms of it's pricing. I pointed this out briefly in the Python outlier section, but I also wanted to reference it here. If a MA policy is being evaluated for formulary adjustment, Kymriah will likely always be the first to be adjusted.
 
-[insert visual here]
+[insert visual showing Kymriah as an Outlir here]
 
 - In my original analysis, I wanted a medication's growth metrics to factor into the final score, and I have an SQL section dedicated to calculating growth metrics linked here. However, it appears that most medications don't change much from year to year. Every medication grows less than 1% from 2021-2022 and 2022-2023, As shown by the output below. This means that when considering future plan adjustments, it might be best to just use the average price per dose for the previous year.
 
