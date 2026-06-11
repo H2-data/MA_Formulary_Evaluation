@@ -8,9 +8,19 @@
 
 ### **Important Notes:**
 
-- The data used in this project is a public dataset, it is not confidential data.
+The Data:
 
-- Files are labelled from 01-05. They can be read in numeric order. The dashboard is screenshotted and linked below, and it is the last step in the process.
+- The data for this project was obtained from a **publicly available** dataset containing medication price and beneficiary information from 2019 to 2024. It was created by the Centers for Medicare and Medicaid Services (CMS).
+
+[Data Source Link]
+
+How to Read This Repository:
+
+- Files are labelled from 01-05. They can be read in numeric order. This README file contains the important points of the analysis, and should be read first.
+
+Who is the Project's Intended Recipient?:
+
+- This project is meant to be recieved and read by Alpha Green Insurance LLC project managers currently assessing the company's Medicare Advantage policies. This project will contain a complete ranking of the financial risks of every single medication, as well as an overview of medications with high liability for financial losses. These resources can be used to accurately determine how to safely alter MA policy forumlaries to minimize finiancial loss.
 
 ### **Scenario and Objective:**
 
