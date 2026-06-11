@@ -44,7 +44,7 @@
 
 **Who is the Project's Intended Recipient?:**
 
-- This project is meant to be recieved and read by Alpha Green Insurance LLC project managers and pharmacy actuaries currently assessing the company's Medicare Advantage policies. This project will contain a complete ranking of the financial risks of every single medication, as well as an overview of medications with high liability for financial losses. These resources can be used to accurately determine how to safely alter MA policy forumlaries to minimize finiancial loss.
+- This project is meant to be recieved and read by Alpha Green Insurance LLC project managers and pharmacy actuaries currently assessing the company's Medicare Advantage policies. This project will contain a complete ranking of the financial risks of every single medication, as well as an overview of medications with high liability for financial losses. These resources can be used to accurately determine how to safely alter MA policy formularies to minimize finiancial loss.
 
 ### **Scenario and Objective:**
 
@@ -158,14 +158,16 @@ From this, it can be concluded that there isn't a very strong correlation betwee
 
 <img width="1172" height="276" alt="image" src="https://github.com/user-attachments/assets/3fd6f8d3-624b-4afa-bd60-828e7659064a" />
 <br>
+<br>
 
 - I standardized the data using the percent rank compisite score so the visuals look more balanced, but I wanted to mention a dosage price outlier here. When using the raw numbers, it's clear that Kymriah is an extreme outlier in terms of it's pricing. I pointed this out briefly in the Python outlier section, but I also wanted to reference it here. If a MA policy is being evaluated for formulary adjustment, Kymriah will likely always be the first to be adjusted.
 
 [insert visual showing Kymriah as an Outlir here]
+<br>
 
 - In my original analysis, I wanted a medication's growth metrics to factor into the final score, and I have an SQL section dedicated to calculating growth metrics linked here. However, it appears that most medications don't change much from year to year. Every medication grows less than 1% from 2021-2022 and 2022-2023, As shown by the output below. This means that when considering future plan adjustments, it might be best to just use the average price per dose for the previous year.
 
-
+[Insert query output image here]
 
 The rest of the dashboard as well as the scores for all other medications can be found in the Power BI section of this project, linked here:
 <br>
@@ -182,5 +184,3 @@ The rest of the dashboard as well as the scores for all other medications can be
 - Before adjusting a medication, be sure to verify whether it is an outlier. **Outliers are marked in yellow on the dashboard**. If a medication is an outlier for the specified year, look into that medication to verify whether it was only a liability for that year, or if it's been a liability for multiple years.
 
 - This dashboard list should be updated with fresh data annually. As long as the data schema is maintained, it can be sent through the pipeline found in each part of the project (Python -> SQL -> Power BI). It will score the medications and organize them by liability.
-
-- 
