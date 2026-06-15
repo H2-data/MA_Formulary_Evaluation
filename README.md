@@ -14,7 +14,7 @@
 
 [Data Source Link]
 
-**How to Read This Repository:**
+**How to Read and Run This Repository:**
 
 - Files are labelled from 01-05. They can be read in numeric order. This README file contains the important points of the analysis, and should be read first.
 
@@ -40,7 +40,7 @@
 
 **Step 4.** Open the Power BI pbix file.
 
-**Step 5.** You need to have an ODBC connector since the code is MySQL. once you've created the connection object, you can connect the database to Power BI using the Power Query. This should activate the dashboard.
+**Step 5.** You need to have an ODBC connector since the code is MySQL. Once you've created the connection object, you can connect the database to Power BI using the Power Query. This should activate the dashboard.
 
 **Who is the Project's Intended Recipient?:**
 
