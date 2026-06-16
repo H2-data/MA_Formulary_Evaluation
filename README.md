@@ -12,7 +12,9 @@
 
 - The data for this project was obtained from a **publicly available** dataset containing medication price and beneficiary information from 2019 to 2024. It was created by the Centers for Medicare and Medicaid Services (CMS).
 
-[Data Source Link]
+[Data Source](https://data.cms.gov/summary-statistics-on-use-and-payments/medicare-medicaid-spending-by-drug/medicare-part-b-spending-by-drug)
+
+[Dataset]
 
 **How to Read and Run This Repository:**
 
@@ -109,11 +111,9 @@ To see each step of the data cleaning process, see the preprocessing section of 
 
 After trying a couple of different methods, I believe the most effective way to decide which medications incur the most losses is using a Weighted Composite Score since there are multiple factors that determine whether a medication is a liability. I will use 5 factors to score a medication:
 
-- Average Spending (30%), the higher the price, the higher score
+- Average Spending (50%), the higher the price, the higher score
 - Total Beneficiaries (inverted) (25%), the lower the number of beneficiaries, the higher the score
 - Total Claims (inverted) (25%), the lower the number of claims, the higher the score
-- 2022-2023 Spending Change (15%), the higher the growth, the higher the score
-- 2021-2022 Spending Change (5%), the higher the growth, the higher the score
 
 The following is a snippet of the resulting output. To keep things clean, I used Percent Rank as the standardization method, meaning each medication is ranked a number from 0 to 1 depending on it's overall score. The higher the score, the more likely the medication is a liability. I also kept the original scores for each category for later plotting.
 
@@ -133,8 +133,6 @@ The rest of the code I used to get these scores can be found in the SQL section 
 <br>
 <br>
 
-[SQL_Imports](02_Importing.sql)  
-[SQL_Nulls](03_Nulls.sql)  
 [SQL_Growth](04_Growth%20Calculation.sql)  
 [SQL_Scoring](05_Scoring.sql)  
 
