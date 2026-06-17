@@ -16,9 +16,7 @@
 
 [Dataset]
 
-**How to Read and Run This Repository:**
-
-- Files are labelled from 01-05. They can be read in numeric order. This README file contains the important points of the analysis, and should be read first.
+**How to Run This Repository:**
 
 - To test the code on this project, you will need access to the following resources:
   
