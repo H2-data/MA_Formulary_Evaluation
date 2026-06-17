@@ -107,7 +107,7 @@ To see each step of the data cleaning process, see the preprocessing section of 
 
 ### **How can I solve the problem?**
 
-After trying a couple of different methods, I believe the most effective way to decide which medications incur the most losses is using a Weighted Composite Score since there are multiple factors that determine whether a medication is a liability. I will use 5 factors to score a medication:
+After trying a couple of different methods, I believe the most effective way to decide which medications incur the most losses is using a Weighted Composite Score since there are multiple factors that determine whether a medication is a liability. I will use 3 factors to score a medication:
 
 - Average Spending (50%), the higher the price, the higher score
 - Total Beneficiaries (inverted) (25%), the lower the number of beneficiaries, the higher the score
