@@ -6,9 +6,9 @@
 
 ---
 
-### **Important Notes:**
+## **Important Notes:**
 
-**The Data:**
+### **The Data:**
 
 - The data for this project was obtained from a **publicly available** dataset containing medication price and beneficiary information from 2019 to 2024. It was created by the Centers for Medicare and Medicaid Services (CMS).
 
@@ -16,7 +16,7 @@
 
 [Dataset]
 
-**How to Run This Repository:**
+### **How to Run This Repository:**
 
 - To test the code on this project, you will need access to the following resources:
   
@@ -42,11 +42,12 @@
 
 **Step 5.** You need to have an ODBC connector since the code is MySQL. Once you've created the connection object, you can connect the database to Power BI using the Power Query. This should activate the dashboard.
 
-**Who is the Project's Intended Recipient?:**
+### **Who is the Project's Intended Recipient?:**
 
 - This project is meant to be recieved and read by Alpha Green Insurance LLC project managers and pharmacy actuaries currently assessing the company's Medicare Advantage policies. This project will contain a complete ranking of the financial risks of every single medication, as well as an overview of medications with high liability for financial losses. These resources can be used to accurately determine how to safely alter MA policy formularies to minimize finiancial loss.
+___
 
-### **Scenario and Objective:**
+## **Scenario and Objective:**
 
 Alpha Green Insurance LLC (Not a real company) wants to make changes to their formulary for select Medicare Advantage policies and supplements in 2024. They have asked me to look over the formulary data for the previous years to get a feel for the territory, and create a list of medications that can be reliably removed from a formulary. My goal is to answer the following business question:
 
@@ -67,8 +68,9 @@ To interact with the dashboard or search for individual medication scores, see t
 <br>
 
 [Dashboard](https://app.powerbi.com/view?r=eyJrIjoiZmYyYzJiNDctOTI1Ny00NDRiLWE5OTItODI5NDc0M2U1ZjE0IiwidCI6ImRmZWM4YzJjLThlNWUtNDI4Yy05MmE4LTkzOTI1ZjM3Y2JlYiJ9)
+___
 
-### **Data Preprocessing:**
+## **Data Preprocessing:**
 
 Aside from generic preprocessing (outliers, duplicates and missing values) I needed to alter the data structure itself. The data is in a **wide format**, meaning each item has a column for every individual year. Most of the cleaning required melting it into a long format. Below is the original data:
 
@@ -104,8 +106,9 @@ Now the rabies vaccine is dupilcated once for each year, and there is a 'year' c
 To see each step of the data cleaning process, see the preprocessing section of this project, linked here:
 
 [Preprocessing](01_medicare_medication.py)
+___
 
-### **How can I solve the problem?**
+## **How can I solve the problem?**
 
 After trying a couple of different methods, I believe the most effective way to decide which medications incur the most losses is using a Weighted Composite Score since there are multiple factors that determine whether a medication is a liability. I will use 3 factors to score a medication:
 
@@ -133,8 +136,9 @@ The rest of the code I used to get these scores can be found in the SQL section 
 
 [SQL_Growth](04_Growth%20Calculation.sql)  
 [SQL_Scoring](05_Scoring.sql)  
+___
 
-### **Results and Observations:**
+## **Results and Observations:**
 
 Before we continue, I want to see if there is a relationship between average dosage cost and beneficiaries/claims. I'll use scatterplots to show the output between claims/beneficiaries and average dosage price.
 
@@ -170,8 +174,9 @@ The rest of the dashboard as well as the scores for all other medications can be
 <br>
 
 [Dashboard](https://app.powerbi.com/view?r=eyJrIjoiZmYyYzJiNDctOTI1Ny00NDRiLWE5OTItODI5NDc0M2U1ZjE0IiwidCI6ImRmZWM4YzJjLThlNWUtNDI4Yy05MmE4LTkzOTI1ZjM3Y2JlYiJ9)
+___
 
-### **Analyst Notes and Recommendations:**
+## **Analyst Notes and Recommendations:**
 
 - The scoring system is simple: **The higher the score, the more liable the medication is for causing losses.** I showed the top 10 items for each data question in the previous section, but the dashboard list contains all medications and their respective attribute scores and final composite score. Should a policy need modification beyond the scope of the top 10, simply go down the list and see which medications are the most appropriate for removal. You can also manually search specific medications and years using the search bar at the top.
   
