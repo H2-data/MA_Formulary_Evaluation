@@ -14,13 +14,13 @@
 
 [Data Source](https://data.cms.gov/summary-statistics-on-use-and-payments/medicare-medicaid-spending-by-drug/medicare-part-b-spending-by-drug)
 
-[Dataset]
+[Dataset](https://github.com/H2-data/MA_Formulary_Evaluation/blob/6924391bccd695f28df08b05fb3a94e2003b80e8/DSD_PTB_RY25_P06_V10_DYT23_HCPCS-%20250430.csv)
 
 ### **How to Run This Repository:**
 
 - To test the code on this project, you will need access to the following resources:
   
-  	- Visual Studio Code (Or any other all-nclusive coding environment.)
+  	- Visual Studio Code (Or any other all-inclusive coding environment.)
   	- A MySQL environment extension
   	- Power BI Desktop
   	- An OBDC Connector
@@ -42,7 +42,7 @@
 
 **Step 5.** You need to have an ODBC connector since the code is MySQL. Once you've created the connection object, you can connect the database to Power BI using the Power Query. This should activate the dashboard.
 
-### **Who is the Project's Intended Recipient?:**
+### **Who is the Project's Intended Recipient?**
 
 - This project is meant to be recieved and read by Alpha Green Insurance LLC project managers and pharmacy actuaries currently assessing the company's Medicare Advantage policies. This project will contain a complete ranking of the financial risks of every single medication, as well as an overview of medications with high liability for financial losses. These resources can be used to accurately determine how to safely alter MA policy formularies to minimize finiancial loss.
 ___
