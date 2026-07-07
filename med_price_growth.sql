@@ -8,37 +8,47 @@ SELECT
   l.Brnd_Name,
   SUM(CASE WHEN l.year = 2022 THEN m.Avg_Spndng_Per_Dsg_Unt END) AS Avg_Spndng_Per_DU_2022,
   SUM(CASE WHEN l.year = 2023 THEN m.Avg_Spndng_Per_Dsg_Unt END) AS Avg_Spndng_Per_DU_2023,
-  (
-      SUM(CASE WHEN l.year = 2023 THEN m.Avg_Spndng_Per_Dsg_Unt END)
-    - SUM(CASE WHEN l.year = 2022 THEN m.Avg_Spndng_Per_Dsg_Unt END)
-  ) / SUM(CASE WHEN l.year = 2022 THEN m.Avg_Spndng_Per_Dsg_Unt END) AS pct_change
+  (SUM(CASE WHEN l.year = 2023 THEN m.Avg_Spndng_Per_Dsg_Unt END) - 
+  (SUM(CASE WHEN l.year = 2022 THEN m.Avg_Spndng_Per_Dsg_Unt END))) / 
+  SUM(CASE WHEN l.year = 2022 THEN m.Avg_Spndng_Per_Dsg_Unt END) * 100 AS pct_change
 FROM lookup AS l
 JOIN meds AS m
   ON l.Brnd_Name = m.Brnd_Name
+  AND l.year = m.year
 GROUP BY Brnd_Name;
 
-SELECT * FROM v_growth_22_23
+SELECT 
+  Brnd_Name,
+  Avg_Spndng_Per_DU_2022,
+  Avg_Spndng_Per_DU_2023,
+  ROUND(pct_change, 2)
+FROM v_growth_22_23
+WHERE Avg_Spndng_Per_DU_2022 > 10
 ORDER BY pct_change DESC;
 
 -- Repeat the above process fo 2021 and 2022.
 
-DROP VIEW change_21_22;
+DROP VIEW v_growth_21_22;
 
-CREATE VIEW change_21_22 AS
+CREATE VIEW v_growth_21_22 AS
 SELECT
-    Brnd_Name,
-    MAX(CASE WHEN year = 2021 THEN Avg_Spndng_Per_Dsg_Unt END) AS Avg_Spndng_Per_DU_2021,
-    MAX(CASE WHEN year = 2022 THEN Avg_Spndng_Per_Dsg_Unt END) AS Avg_Spndng_Per_DU_2022,
-    MAX(Outlier_Flag) AS Outlier_Flag,
-    (
-        MAX(CASE WHEN year = 2022 THEN Avg_Spndng_Per_Dsg_Unt END)
-      - MAX(CASE WHEN year = 2021 THEN Avg_Spndng_Per_Dsg_Unt END)
-    ) / NULLIF(MAX(CASE WHEN year = 2021 THEN Avg_Spndng_Per_Dsg_Unt END), 0) AS pct_change
-FROM medidrugs
+  l.Brnd_Name,
+  SUM(CASE WHEN l.year = 2021 THEN m.Avg_Spndng_Per_Dsg_Unt END) AS Avg_Spndng_Per_DU_2022,
+  SUM(CASE WHEN l.year = 2022 THEN m.Avg_Spndng_Per_Dsg_Unt END) AS Avg_Spndng_Per_DU_2023,
+  (SUM(CASE WHEN l.year = 2022 THEN m.Avg_Spndng_Per_Dsg_Unt END) - 
+  (SUM(CASE WHEN l.year = 2021 THEN m.Avg_Spndng_Per_Dsg_Unt END))) / 
+  SUM(CASE WHEN l.year = 2021 THEN m.Avg_Spndng_Per_Dsg_Unt END) * 100 AS pct_change
+FROM lookup AS l
+JOIN meds AS m
+  ON l.Brnd_Name = m.Brnd_Name
+  AND l.year = m.year
 GROUP BY Brnd_Name;
 
-SELECT * FROM change_21_22
-LIMIT 10;
-
--- Based on my findings, it appears that growth isn't as reliable a measure as I thought.
--- It will not be factored into scoring.
+SELECT 
+  Brnd_Name,
+  Avg_Spndng_Per_DU_2022,
+  Avg_Spndng_Per_DU_2023,
+  ROUND(pct_change, 2)
+FROM v_growth_21_22
+WHERE Avg_Spndng_Per_DU_2023 > 10
+ORDER BY pct_change DESC;
