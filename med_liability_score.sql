@@ -46,6 +46,13 @@ CREATE VIEW final_scores AS
 SELECT
     r.Brnd_Name,
     r.year,
+    r.avg_spnd_rank,
+    r.HCPCS_Cd,
+    r.Outlier_Flag,
+    r.tot_benes_rank,
+    r.tot_benes_true,
+    r.tot_clms_rank,
+    r.tot_clms_true,
     (   
         0.45 * r.avg_spnd_rank
       + 0.20 * r.tot_benes_rank
@@ -70,6 +77,13 @@ CREATE VIEW final_scores_unw AS
 SELECT
     r.Brnd_Name,
     r.year,
+    r.avg_spnd_rank,
+    r.HCPCS_Cd,
+    r.Outlier_Flag,
+    r.tot_benes_rank,
+    r.tot_benes_true,
+    r.tot_clms_rank,
+    r.tot_clms_true,
     (   
         r.avg_spnd_rank
         + r.tot_benes_rank
