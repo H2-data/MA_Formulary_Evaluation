@@ -61,7 +61,7 @@ I will translate this business question into data questions:
 
 ### **Data Report:**
 
-<img width="1193" height="668" alt="image" src="https://github.com/user-attachments/assets/b2ba68b0-42a2-4f25-b88e-8d3d6dec5553" />
+<img width="1282" height="717" alt="Screenshot 2026-07-08 103131" src="https://github.com/user-attachments/assets/7a8ec0b6-acf3-44a8-a044-2e51f45921a3" />
 <br>
 To interact with the dashboard or search for individual medication scores, see the Power BI section of the project, linked here:  
 <br>
@@ -119,16 +119,15 @@ After trying a couple of different methods, I believe the most effective way to 
 The following is a snippet of the resulting output. To keep things clean, I used Percent Rank as the standardization method, meaning each medication is ranked a number from 0 to 1 depending on it's overall score. The higher the score, the more likely the medication is a liability. I also kept the original scores for each category for later plotting.
 
 ```SQL
-SELECT
-	Brnd_Name as Medication,
-	Outlier_Flag as Outlier_Flag,
-    ROUND(composite_score, 2) as Score
+SELECT 
+	Brnd_Name,
+    year,
+    ROUND(composite_score, 2) as Composite_Score
 FROM final_scores
-WHERE YEAR = 2023
-ORDER BY composite_score DESC
-LIMIT 5;
+WHERE year = 2023
+ORDER BY composite_score DESC;
 ```
-<img width="492" height="132" alt="image" src="https://github.com/user-attachments/assets/48770bac-28a1-43d4-bfaf-67aaddf4a462" />
+<img width="552" height="381" alt="Screenshot 2026-07-08 103340" src="https://github.com/user-attachments/assets/bbfa8d46-f3fb-48df-83e7-c5485dda2eec" />
 <br>
 The rest of the code I used to get these scores can be found in the SQL section of this project, linked here:  
 <br>
@@ -142,7 +141,7 @@ ___
 
 Before we continue, I want to see if there is a relationship between average dosage cost and beneficiaries/claims. I'll use scatterplots to show the output between claims/beneficiaries and average dosage price.
 
-<img width="1078" height="326" alt="image" src="https://github.com/user-attachments/assets/56e0dcfe-2ecb-48c9-85c6-95db9475aff2" />
+<img width="1062" height="277" alt="Screenshot 2026-07-08 105657" src="https://github.com/user-attachments/assets/0337c56b-4b51-4076-ac19-afbdea7b0a01" />
 <br>
 From this, it can be concluded that there isn't a very strong correlation between average price per dose and number of claims/beneficiaries. It's more of a case by case basis. There is a near linear correlation between claims and beneficiaries which is obvious, I wanted to check to confirm whether I could use them interchangeably.
 
@@ -150,29 +149,29 @@ From this, it can be concluded that there isn't a very strong correlation betwee
 
 - If a policy requires removal or tier adjustment of medications based on overall score for the most recent year in the data (2023), these would be the top 10 candidates:
   
-<img width="1176" height="258" alt="image" src="https://github.com/user-attachments/assets/ebbb16bf-5b69-4bd8-84d8-0ec1cb7bff63" />
+<img width="1277" height="275" alt="Screenshot 2026-07-08 103517" src="https://github.com/user-attachments/assets/b1b1bfe5-6b94-4a5e-a855-070c966a3b5b" />
 <br>
 <br>
 
 - If a policy requires tier adjustment of medications due to high dosage prices AND high number of beneficiaries for the most recent year in the data (2023), these would be the top 10 candidates.
 
-<img width="1172" height="276" alt="image" src="https://github.com/user-attachments/assets/3fd6f8d3-624b-4afa-bd60-828e7659064a" />
+<img width="1282" height="317" alt="Screenshot 2026-07-08 103535" src="https://github.com/user-attachments/assets/8440b4c5-1a18-4b28-b895-571a0831a053" />
 <br>
 <br>
 
-- I standardized the data using the percent rank compisite score so the visuals look more balanced, but I wanted to mention a dosage price outlier here. When using the raw numbers, it's clear that Kymriah is an extreme outlier in terms of it's pricing. I pointed this out briefly in the Python outlier section, but I also wanted to reference it here. If a MA policy is being evaluated for formulary adjustment, Kymriah will likely always be the first to be adjusted.
+- I standardized the data using the percent rank compisite score so the visuals look more balanced, but I wanted to mention some dosage price outliers here. When using the raw numbers, it's clear that Kymriah, Yescarta, Breyanzi, Tecartus, Carvykti and Provenge are extreme outliers in terms of pricing. I pointed this out briefly in the Python outlier section, but I also wanted to reference it here. If a MA policy is being evaluated for formulary adjustment and it covers any of these medication, they should have increased priority for removal.
 
 <div align="center">
 	
-<img width="722" height="202" alt="image" src="https://github.com/user-attachments/assets/b619c711-a187-4aec-93ca-92e049e2987b" />
+<img width="876" height="267" alt="Screenshot 2026-07-08 104007" src="https://github.com/user-attachments/assets/15f0a2bb-8cd2-4b50-8643-8b223143c207" />
 
 </div>
 
 <br>
 
-- In my original analysis, I wanted a medication's growth metrics to factor into the final score, and I have an SQL section dedicated to calculating growth metrics linked here. However, it appears that most medications don't change much from year to year. Every medication grows less than 1% from 2021-2022 and 2022-2023, As shown by the output below. This means that when considering future plan adjustments, it might be best to just use the average price per dose for the previous year.
+- In terms of 2021-2022 growth and 2022-2023 growth metrics, these are the top medications to keep an eye on. Anything in the center tables had a very high growth percentage.
 
-[Insert query output image here]
+[Growth visual here]
 
 The rest of the dashboard as well as the scores for all other medications can be found in the Power BI section of this project, linked here:
 <br>
