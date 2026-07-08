@@ -18,8 +18,13 @@ SELECT
 FROM lookup AS l
 JOIN meds AS m
     ON l.Brnd_Name = m.Brnd_Name
+    AND l.year = m.year
+    AND l.HCPCS_Cd = m.HCPCS_Cd
 JOIN benes AS b
-    ON l.Brnd_Name = b.Brnd_Name;
+    ON l.Brnd_Name = b.Brnd_Name
+    AND l.year = b.year
+    AND l.HCPCS_Cd = b.HCPCS_Cd;
+
 SELECT * FROM raw_scores;
 
 DROP VIEW raw_growth_scores;
@@ -47,7 +52,6 @@ SELECT
     r.Brnd_Name,
     r.year,
     r.avg_spnd_rank,
-    r.HCPCS_Cd,
     r.Outlier_Flag,
     r.tot_benes_rank,
     r.tot_benes_true,
@@ -103,9 +107,9 @@ ORDER BY composite_score_unw DESC;
 SELECT 
 	Brnd_Name,
     year,
-    ROUND(composite_score, 2)
+    ROUND(composite_score, 2) as Composite_Score
 FROM final_scores
-ORDER BY composite_score DESC
-LIMIT 10;
+WHERE year = 2023
+ORDER BY composite_score DESC;
 
 -- Everything looks like it should. Now I just need to connect the database into Power BI.
