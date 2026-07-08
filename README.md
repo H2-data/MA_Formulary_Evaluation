@@ -171,7 +171,7 @@ From this, it can be concluded that there isn't a very strong correlation betwee
 
 - In terms of 2021-2022 growth and 2022-2023 growth metrics, these are the top medications to keep an eye on. Anything in the center tables had a very high growth percentage.
 
-[Growth visual here]
+<img width="1172" height="660" alt="image" src="https://github.com/user-attachments/assets/7277bfc3-5932-43b8-b777-780a0e284c66" />
 
 The rest of the dashboard as well as the scores for all other medications can be found in the Power BI section of this project, linked here:
 <br>
