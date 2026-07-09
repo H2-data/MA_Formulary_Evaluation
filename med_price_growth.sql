@@ -13,8 +13,7 @@ SELECT
   SUM(CASE WHEN l.year = 2022 THEN m.Avg_Spndng_Per_Dsg_Unt END) * 100 AS pct_change
 FROM lookup AS l
 JOIN meds AS m
-  ON l.Brnd_Name = m.Brnd_Name
-  AND l.year = m.year
+  ON l.HCPCS_Cd = m.HCPCS_Cd
 GROUP BY Brnd_Name;
 
 SELECT 
@@ -40,8 +39,7 @@ SELECT
   SUM(CASE WHEN l.year = 2021 THEN m.Avg_Spndng_Per_Dsg_Unt END) * 100 AS pct_change
 FROM lookup AS l
 JOIN meds AS m
-  ON l.Brnd_Name = m.Brnd_Name
-  AND l.year = m.year
+  ON l.HCPCS_Cd = m.HCPCS_Cd
 GROUP BY Brnd_Name;
 
 SELECT 
