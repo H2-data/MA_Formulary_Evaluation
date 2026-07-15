@@ -3,7 +3,12 @@
 -- Here, I want to take a look at the growth metrics for 2021 to 2022 and 2022 to 2023.
 DROP VIEW v_growth_22_23;
 
-CREATE VIEW v_growth_22_23 AS
+-- My logic is as follows: 
+-- If I change pct change nulls to 0 using COALESCE it could misinform the reader to think there was no growth.
+-- If I use it to change the pct change to "Incomplete Data", it would mess up my Data Type.
+-- Maybe I should just leave it as null and exclude it in the Percent Ranking later? Ask Giuseppe.
+
+CREATE VIEW v_growth_22_23 AS 
 SELECT
   l.Brnd_Name,
   SUM(CASE WHEN l.year = 2022 THEN m.Avg_Spndng_Per_Dsg_Unt END) AS Avg_Spndng_Per_DU_2022,
