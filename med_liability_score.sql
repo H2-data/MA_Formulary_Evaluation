@@ -1,3 +1,4 @@
+-- Active: 1780043201174@@127.0.0.1@3306@medidrugs
 -- Now that I have all data and metrics, I'll score everything here.
 -- First, I'll create the raw scores for claims, beneficiaries, and spending.
 -- I'll also create inverted and uninverted options for claims and beneficiaries.
@@ -21,7 +22,19 @@ JOIN meds AS m
 JOIN benes AS b
     ON l.HCPCS_Cd = b.HCPCS_Cd;
 
-SELECT * FROM v_raw_scores;
+-- Sanity Check
+
+SELECT
+    m.Brnd_Name, 
+    m.Avg_Spndng_Per_Dsg_Unt,
+    v.avg_spnd_rank
+FROM meds AS m
+JOIN v_raw_scores AS v
+    ON m.HCPCS_Cd = v.HCPCS_Cd
+WHERE m.year = 2023;
+
+-- The top 8 2023 medications in order of least to greatest for 
+-- the raw average spending scores and the raw average spending are the same.
 
 DROP VIEW v_raw_growth_scores;
 
@@ -41,6 +54,7 @@ ORDER BY growth_22_23_rank DESC;
 
 
 -- I have all the raw scores, but the final scores will be calculated with weight for each aspect. 
+
 DROP VIEW v_final_scores;
 
 -- There should be no problem if I join on Brnd_Name.

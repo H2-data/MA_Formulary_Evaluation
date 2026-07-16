@@ -8,6 +8,8 @@ DROP VIEW v_growth_22_23;
 -- If I use it to change the pct change to "Incomplete Data", it would mess up my Data Type.
 -- Maybe I should just leave it as null and exclude it in the Percent Ranking later? Ask Giuseppe.
 
+-- Change to CTE + later calculation.
+
 CREATE VIEW v_growth_22_23 AS 
 SELECT
   l.Brnd_Name,
