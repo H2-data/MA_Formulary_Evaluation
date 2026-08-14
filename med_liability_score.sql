@@ -9,6 +9,7 @@ CREATE VIEW v_raw_scores AS
 SELECT
     l.Brnd_Name,
     l.HCPCS_Cd,
+    l.MedicationID,
     l.Outlier_Flag,
     l.year,
     PERCENT_RANK() OVER(PARTITION BY l.year ORDER BY m.Avg_Spndng_Per_Dsg_Unt) AS avg_spnd_rank,
@@ -18,19 +19,18 @@ SELECT
     PERCENT_RANK() OVER(PARTITION BY l.year ORDER BY b.Tot_Benes) AS tot_benes_true
 FROM lookup AS l
 JOIN meds AS m
-    ON l.HCPCS_Cd = m.HCPCS_Cd
+    ON l.MedicationID = m.MedicationID
 JOIN benes AS b
-    ON l.HCPCS_Cd = b.HCPCS_Cd;
+    ON l.MedicationID = b.MedicationID;
 
 -- Sanity Check
-
 SELECT
     m.Brnd_Name, 
     m.Avg_Spndng_Per_Dsg_Unt,
     v.avg_spnd_rank
 FROM meds AS m
 JOIN v_raw_scores AS v
-    ON m.HCPCS_Cd = v.HCPCS_Cd
+    ON m.MedicationID = v.MedicationID
 WHERE m.year = 2023;
 
 -- The top 8 2023 medications in order of least to greatest for 
@@ -53,12 +53,13 @@ FROM v_raw_growth_scores
 ORDER BY growth_22_23_rank DESC;
 
 
+
 -- I have all the raw scores, but the final scores will be calculated with weight for each aspect. 
 
 DROP VIEW v_final_scores;
 
 -- There should be no problem if I join on Brnd_Name.
--- Yes, there are duplicate brand names, one for each year, but the table Im provides the same result for each year.
+-- Yes, there are duplicate brand names, one for each year, but the table provides the same result for each year.
 -- The values that are actually affected by year aren't being joined, they're alrady in 1 table split by the index (HCPCS_Cd)
 
 CREATE VIEW v_final_scores AS
@@ -71,6 +72,8 @@ SELECT
     r.tot_benes_true,
     r.tot_clms_rank,
     r.tot_clms_true,
+    g.growth_21_22_rank,
+    g.growth_22_23_rank,
     (   
         0.45 * r.avg_spnd_rank
       + 0.20 * r.tot_benes_rank
@@ -82,11 +85,18 @@ FROM v_raw_scores AS r
 JOIN v_raw_growth_scores AS g
     ON r.Brnd_Name = g.Brnd_Name;
 
+-- Sanity Check: To ensure the code is working as it should with no silent debugs, I will check the following for 3 random meds:
+-- 1. Each medication has the same growth rate in it's growth rate columns for each year.
+-- 2. I will do manual composite score mathmatics on the scoring numbers to ensure it matches the final composite score.
+-- Since all scores have already been checked for accuracy, this should be sufficient for production. 
+
 SELECT
     *
 FROM v_final_scores
-ORDER BY composite_score DESC;
+WHERE Brnd_Name IN ('Alimta*', 'Acetaminophen (J0131)', 'Gelsyn-3');
 
+-- I will also check for fanning by ensuring no medication appears more than 5 times, as the dataset only spans from 2019-2023.
+-- If all is well, each medication should appear with a scoring for each year.
 SELECT
     Brnd_Name,
     COUNT(Brnd_Name)
@@ -120,11 +130,12 @@ FROM v_raw_scores AS r
 JOIN v_raw_growth_scores AS g
     ON r.Brnd_Name = g.Brnd_Name;
 
+-- I'll repeat the same sanity checks for the unweighted scores.
+
 SELECT
     *
 FROM v_final_scores_unw
-ORDER BY composite_score_unw DESC;
-
+WHERE Brnd_Name IN ('Alimta*', 'Acetaminophen (J0131)', 'Gelsyn-3');
 SELECT
     Brnd_Name,
     COUNT(Brnd_Name)
