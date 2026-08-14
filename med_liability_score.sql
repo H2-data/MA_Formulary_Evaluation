@@ -52,15 +52,13 @@ SELECT
 FROM v_raw_growth_scores
 ORDER BY growth_22_23_rank DESC;
 
-
-
 -- I have all the raw scores, but the final scores will be calculated with weight for each aspect. 
 
 DROP VIEW v_final_scores;
 
 -- There should be no problem if I join on Brnd_Name.
 -- Yes, there are duplicate brand names, one for each year, but the table provides the same result for each year.
--- The values that are actually affected by year aren't being joined, they're alrady in 1 table split by the index (HCPCS_Cd)
+-- The values that are actually affected by year aren't being joined, they're alrady in 1 table split by the MedicationID
 
 CREATE VIEW v_final_scores AS
 SELECT
