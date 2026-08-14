@@ -50,7 +50,8 @@ JOIN v_growth_22_23 AS g2
 SELECT
     *
 FROM v_raw_growth_scores
-ORDER BY growth_22_23_rank DESC;
+ORDER BY growth_22_23_rank DESC
+LIMIT 10;
 
 -- I have all the raw scores, but the final scores will be calculated with weight for each aspect. 
 
