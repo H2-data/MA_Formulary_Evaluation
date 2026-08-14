@@ -63,11 +63,6 @@ I will translate this business question into data questions:
 
 <img width="1282" height="717" alt="Screenshot 2026-07-08 103131" src="https://github.com/user-attachments/assets/7a8ec0b6-acf3-44a8-a044-2e51f45921a3" />
 <br>
-To interact with the dashboard or search for individual medication scores, see the Power BI section of the project, linked here:  
-<br>
-<br>
-
-[Dashboard](https://app.powerbi.com/view?r=eyJrIjoiZmYyYzJiNDctOTI1Ny00NDRiLWE5OTItODI5NDc0M2U1ZjE0IiwidCI6ImRmZWM4YzJjLThlNWUtNDI4Yy05MmE4LTkzOTI1ZjM3Y2JlYiJ9)
 ___
 
 ## **Data Preprocessing:**
@@ -112,9 +107,11 @@ ___
 
 After trying a couple of different methods, I believe the most effective way to decide which medications incur the most losses is using a Weighted Composite Score since there are multiple factors that determine whether a medication is a liability. I will use 3 factors to score a medication:
 
-- Average Spending (50%), the higher the price, the higher score
-- Total Beneficiaries (inverted) (25%), the lower the number of beneficiaries, the higher the score
-- Total Claims (inverted) (25%), the lower the number of claims, the higher the score
+- Average Spending (45%), the higher the price, the higher score
+- Total Beneficiaries (inverted) (20%), the lower the number of beneficiaries, the higher the score
+- Total Claims (inverted) (20%), the lower the number of claims, the higher the score
+- 2022-2023 Growth (10%), the higher the growth, the higher the score
+- 2021-2022 Growth (5%), the higher the growth, the higher the score
 
 The following is a snippet of the resulting output. To keep things clean, I used Percent Rank as the standardization method, meaning each medication is ranked a number from 0 to 1 depending on it's overall score. The higher the score, the more likely the medication is a liability. I also kept the original scores for each category for later plotting.
 
@@ -159,7 +156,7 @@ From this, it can be concluded that there isn't a very strong correlation betwee
 <br>
 <br>
 
-- I standardized the data using the percent rank compisite score so the visuals look more balanced, but I wanted to mention some dosage price outliers here. When using the raw numbers, it's clear that Kymriah, Yescarta, Breyanzi, Tecartus, Carvykti and Provenge are extreme outliers in terms of pricing. I pointed this out briefly in the Python outlier section, but I also wanted to reference it here. If a MA policy is being evaluated for formulary adjustment and it covers any of these medication, they should have increased priority for removal.
+- I standardized the data using the percent rank composite score so the visuals look more balanced, but I wanted to mention some dosage price outliers here. When using the raw numbers, it's clear that Kymriah, Yescarta, Breyanzi, Tecartus, Carvykti and Provenge are extreme outliers in terms of pricing. I pointed this out briefly in the Python outlier section, but I also wanted to reference it here. If a MA policy is being evaluated for formulary adjustment and it covers any of these medication, they should have increased priority for removal.
 
 <div align="center">
 	
@@ -172,12 +169,6 @@ From this, it can be concluded that there isn't a very strong correlation betwee
 - In terms of 2021-2022 growth and 2022-2023 growth metrics, these are the top medications to keep an eye on. Anything in the center tables had a very high growth percentage.
 
 <img width="1172" height="660" alt="image" src="https://github.com/user-attachments/assets/7277bfc3-5932-43b8-b777-780a0e284c66" />
-
-The rest of the dashboard as well as the scores for all other medications can be found in the Power BI section of this project, linked here:
-<br>
-<br>
-
-[Dashboard](https://app.powerbi.com/view?r=eyJrIjoiZmYyYzJiNDctOTI1Ny00NDRiLWE5OTItODI5NDc0M2U1ZjE0IiwidCI6ImRmZWM4YzJjLThlNWUtNDI4Yy05MmE4LTkzOTI1ZjM3Y2JlYiJ9)
 ___
 
 ## **Analyst Notes and Recommendations:**
