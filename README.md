@@ -63,7 +63,8 @@ I will translate this business question into data questions:
 
 <img width="1282" height="717" alt="Screenshot 2026-07-08 103131" src="https://github.com/user-attachments/assets/7a8ec0b6-acf3-44a8-a044-2e51f45921a3" />
 <br>
-___
+___  
+
 
 ## **Data Preprocessing:**
 
@@ -130,8 +131,8 @@ The rest of the code I used to get these scores can be found in the SQL section 
 <br>
 <br>
 
-[SQL_Growth](04_Growth%20Calculation.sql)  
-[SQL_Scoring](05_Scoring.sql)  
+[SQL_Growth](https://github.com/H2-data/MA_Formulary_Evaluation/blob/main/med_price_growth.sql)  
+[SQL_Scoring](https://github.com/H2-data/MA_Formulary_Evaluation/blob/main/med_liability_score.sql)   
 ___
 
 ## **Results and Observations:**
