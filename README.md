@@ -63,7 +63,8 @@ I will translate this business question into data questions:
 
 <img width="1282" height="717" alt="Screenshot 2026-07-08 103131" src="https://github.com/user-attachments/assets/7a8ec0b6-acf3-44a8-a044-2e51f45921a3" />
 <br>
-___  
+
+To view and interact with the dashboard, you can find the published version linked [HERE](https://app.powerbi.com/view?r=eyJrIjoiZGZjNmU3OTYtYjc4NC00ODhmLThhNTktYTlmY2UwNzI0ZjY0IiwidCI6ImRmZWM4YzJjLThlNWUtNDI4Yy05MmE4LTkzOTI1ZjM3Y2JlYiJ9).
 
 
 ## **Data Preprocessing:**
